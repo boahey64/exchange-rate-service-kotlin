@@ -1,4 +1,4 @@
-package com.boahey.exchangerateservicekotlin
+package com.boahey.exchangerateservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

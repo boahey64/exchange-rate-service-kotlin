@@ -1,4 +1,4 @@
-package com.boahey.exchangerateservicekotlin
+package com.boahey.exchangerateservice
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
