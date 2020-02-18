@@ -10,7 +10,7 @@ import java.util.*
 @Component
 class ValidDaysService {
 
-    fun calculateNValidDaysBackFrom(startDate: String, count: Int): List<String>? {
+    fun calculateNValidDaysBackFrom(startDate: String, count: Int): List<String> {
         val dayList: MutableList<String> = ArrayList()
         var day = startDate
         for (i in 0 until count) {
