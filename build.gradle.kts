@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
+import org.gradle.api.tasks.testing.logging.*
 
 plugins {
 	id("org.springframework.boot") version "2.2.4.RELEASE"
@@ -39,6 +41,38 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+
+	testLogging {
+		lifecycle {
+			events = mutableSetOf(FAILED, PASSED, SKIPPED)
+			exceptionFormat = TestExceptionFormat.FULL
+			showExceptions = true
+			showCauses = true
+			showStackTraces = true
+			showStandardStreams = true
+		}
+		info.events = lifecycle.events
+		info.exceptionFormat = lifecycle.exceptionFormat
+	}
+
+	// See https://github.com/gradle/kotlin-dsl/issues/836
+	addTestListener(object : TestListener {
+		override fun beforeSuite(suite: TestDescriptor) {}
+		override fun beforeTest(testDescriptor: TestDescriptor) {}
+		override fun afterTest(testDescriptor: TestDescriptor, result: TestResult) {}
+
+		override fun afterSuite(suite: TestDescriptor, result: TestResult) {
+			if (suite.parent == null) { // root suite
+				logger.lifecycle("----")
+				logger.lifecycle("Test result: ${result.resultType}")
+				logger.lifecycle("Test summary: ${result.testCount} tests, " +
+						"${result.successfulTestCount} succeeded, " +
+						"${result.failedTestCount} failed, " +
+						"${result.skippedTestCount} skipped")
+			}
+		}
+	})
+
 }
 
 tasks.withType<KotlinCompile> {
