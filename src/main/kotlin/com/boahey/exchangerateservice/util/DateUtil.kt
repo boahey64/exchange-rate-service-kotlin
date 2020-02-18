@@ -13,7 +13,7 @@ import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
 
-fun convertDateString(date: String): Date? {
+fun convertDateString(date: String): Date {
     return try {
         SimpleDateFormat("yyyy-MM-dd").parse(date)
     } catch (e: ParseException) {

@@ -1,7 +1,7 @@
 package com.boahey.exchangerateservice.model
 
 data class ExchangeRate(
-    private var currentRate: Double,
-    private val averageRate: Double,
-    private val trend: String
+    val currentRate: Double,
+    val averageRate: Double,
+    val trend: String
 )
