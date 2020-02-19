@@ -26,21 +26,21 @@ fun convertDateString(historyDate: HistoryDate): Date? {
     return convertDateString(date)
 }
 
-fun getZeroOClockDate(date: LocalDate): Date? {
+fun getZeroOClockDate(date: LocalDate): Date {
     return Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())
 }
 
-fun getZeroOClockDateFromHistoryDate(historyDate: HistoryDate, addedDays: Int): Date? {
+fun getZeroOClockDateFromHistoryDate(historyDate: HistoryDate, addedDays: Int): Date {
     val localDate = convertHistoryDateToLocalDate(historyDate).plusDays(addedDays.toLong())
     return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
 }
 
-fun getZeroOClockDateOfFirstDayInNextMonthFromHistoryDate(historyDate: HistoryDate): Date? {
+fun getZeroOClockDateOfFirstDayInNextMonthFromHistoryDate(historyDate: HistoryDate): Date {
     val firstDayOfNextMonth = lastDayOfMonth(historyDate).plusDays(1)
     return Date.from(firstDayOfNextMonth.atStartOfDay(ZoneId.systemDefault()).toInstant())
 }
 
-fun getZeroOClockDateOfFirstDayInNextYearFromHistoryDate(historyDate: HistoryDate): Date? {
+fun getZeroOClockDateOfFirstDayInNextYearFromHistoryDate(historyDate: HistoryDate): Date {
     val firstDayOfNextYear = lastDayOfYear(historyDate).plusDays(1)
     return Date.from(firstDayOfNextYear.atStartOfDay(ZoneId.systemDefault()).toInstant())
 }
@@ -78,11 +78,11 @@ private fun lastDayOfYear(historyDate: HistoryDate): LocalDate {
     return dayOfYear.with(TemporalAdjusters.lastDayOfYear())
 }
 
-fun normalizeMonthlyHistoryDate(historyDate: HistoryDate): HistoryDate? {
+fun normalizeMonthlyHistoryDate(historyDate: HistoryDate): HistoryDate {
     return HistoryDate(historyDate.yyyy, historyDate.MM, "01")
 }
 
-fun normalizeYearlyHistoryDate(historyDate: HistoryDate): HistoryDate? {
+fun normalizeYearlyHistoryDate(historyDate: HistoryDate): HistoryDate {
     return HistoryDate(historyDate.yyyy, "01", "01")
 }
 

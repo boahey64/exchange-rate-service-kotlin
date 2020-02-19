@@ -31,7 +31,7 @@ class ExchangeRateDataService(private val exchangeRateRepository: ExchangeRateRe
 
 
     @Transactional(readOnly = true)
-    fun countByCustomerIdAndQueryDateBetween(customerId: String?, start: Date?, end: Date?): Long? {
+    fun countByCustomerIdAndQueryDateBetween(customerId: String?, start: Date?, end: Date?): Long {
         return exchangeRateRepository.countByCustomerIdAndQueryDateBetween(customerId!!, start!!, end!!)
     }
 
