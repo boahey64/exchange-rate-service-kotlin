@@ -6,9 +6,8 @@ import java.text.DecimalFormat
 
 @Component
 class TrendAndAverageService {
-    val AVERAGE_DAYS_COUNT = 5
 
-    fun calculateAverageFiveDaysExchangeRate(exchangeRates: List<Double?>): Double? {
+    fun calculateAverageFiveDaysExchangeRate(exchangeRates: List<Double?>): Double {
         val df = DecimalFormat("#.0000000000")
         return exchangeRates.stream()
                 .mapToDouble { i: Double? -> df.format(i).toDouble() }
@@ -16,7 +15,7 @@ class TrendAndAverageService {
                 .asDouble
     }
 
-    fun calculateExchangeRateTrend(exchangeRates: List<Double>): String? {
+    fun calculateExchangeRateTrend(exchangeRates: List<Double>): String {
         return if (isAscending(exchangeRates)) ExchangeRateTrend.ASCENDING.label else if (isDescending(exchangeRates)) ExchangeRateTrend.DESCENDING.label else if (isConstant(exchangeRates)) ExchangeRateTrend.CONSTANT.label else ExchangeRateTrend.UNDEFINED.label
     }
 

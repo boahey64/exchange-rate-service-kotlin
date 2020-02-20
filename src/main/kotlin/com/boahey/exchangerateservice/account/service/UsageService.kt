@@ -7,6 +7,7 @@ import com.boahey.exchangerateservice.account.model.UsageInfo
 import com.boahey.exchangerateservice.model.HistoryDate
 import com.boahey.exchangerateservice.service.ExchangeRateDataService
 import com.boahey.exchangerateservice.util.*
+import org.springframework.stereotype.Component
 import java.util.*
 
 const val FREE_MAX_ALLOWED_QUERIES_PER_MONTH = 4L
@@ -15,17 +16,18 @@ const val FREE_MAX_ALLOWED_QUERIES_PER_YEAR = 6L
 const val PREMIUM_MAX_ALLOWED_QUERIES_PER_MONTH = 40L
 const val PREMIUM_MAX_ALLOWED_QUERIES_PER_YEAR = 60L
 
+@Component
 class UsageService(
         private val exchangeRateDataService: ExchangeRateDataService,
         private val accountApiClient: AccountApiClient
 ) {
 
-    fun getMonthlyUsageInfo(historyDate: HistoryDate, customerId: String): UsageInfo? {
+    fun getMonthlyUsageInfo(historyDate: HistoryDate, customerId: String): UsageInfo {
         val currentQueryCount = getQueryCountForHistoryDate(historyDate, customerId, Period.MONTHLY)
         return UsageInfo(currentQueryCount, calculateAllowedQueryQuota(Period.MONTHLY, customerId))
     }
 
-    fun getYearlyUsageInfo(historyDate: HistoryDate, customerId: String): UsageInfo? {
+    fun getYearlyUsageInfo(historyDate: HistoryDate, customerId: String): UsageInfo {
         val currentQueryCount = getQueryCountForHistoryDate(historyDate, customerId, Period.YEARLY)
         return UsageInfo(currentQueryCount, calculateAllowedQueryQuota(Period.YEARLY, customerId))
     }

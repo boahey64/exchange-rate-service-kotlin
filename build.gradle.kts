@@ -34,6 +34,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.google.code.gson:gson:2.8.6")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -41,7 +42,6 @@ dependencies {
 	}
 	testImplementation("junit:junit:4.12")
 	testImplementation("com.nhaarman:mockito-kotlin-kt1.1:1.6.0")
-	testImplementation("com.google.code.gson:gson:2.8.6")
 
 	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.1.1.RELEASE") {
 		exclude(module = "spring-cloud-stream-test-support")

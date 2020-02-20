@@ -21,7 +21,7 @@ fun convertDateString(date: String): Date {
     }
 }
 
-fun convertDateString(historyDate: HistoryDate): Date? {
+fun convertDateString(historyDate: HistoryDate): Date {
     val date: String = historyDate.yyyy + "-" + historyDate.MM + "-" + historyDate.dd
     return convertDateString(date)
 }
@@ -90,19 +90,19 @@ fun currentDate(): Date? {
     return Date()
 }
 
-fun getCurrentDateString(): HistoryDate? {
+fun getCurrentDateString(): HistoryDate {
     val localDate = LocalDate.now()
     return calculateDateStringFromLocalDate(localDate)
 }
 
-fun getRandomDateString(): HistoryDate? {
+fun getRandomDateString(): HistoryDate {
     val start = LocalDate.of(2000, Month.JANUARY, 1)
     val end = LocalDate.now()
     val localDate: LocalDate? = between(start, end)
     return calculateDateStringFromLocalDate(localDate)
 }
 
-private fun calculateDateStringFromLocalDate(localDate: LocalDate?): HistoryDate? {
+private fun calculateDateStringFromLocalDate(localDate: LocalDate?): HistoryDate {
     val yearValue = localDate?.format(DateTimeFormatter.ofPattern("yyyy")) ?: "2000"
     val monthValue = localDate?.format(DateTimeFormatter.ofPattern("MM")) ?: "01"
     val dayValue = localDate?.format(DateTimeFormatter.ofPattern("dd")) ?: "01"
