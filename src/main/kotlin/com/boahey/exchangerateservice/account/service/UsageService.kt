@@ -39,9 +39,8 @@ class UsageService(
                 customerId, start, end)
     }
 
-    private fun calculateAllowedQueryQuota(period: Period, customerId: String?): Long {
-        //TODO use accountApiClient.getAccountInfo
-        val accountInfo: AccountInfo = AccountInfo("defaultUser", AccountType.FREE)
+    private fun calculateAllowedQueryQuota(period: Period, customerId: String): Long {
+        val accountInfo  = accountApiClient.getAccountInfo(customerId).block() ?: AccountInfo(customerId, AccountType.FREE)
         if (period.equals(Period.MONTHLY)) return if (accountInfo.type.equals(AccountType.FREE))
             FREE_MAX_ALLOWED_QUERIES_PER_MONTH
         else

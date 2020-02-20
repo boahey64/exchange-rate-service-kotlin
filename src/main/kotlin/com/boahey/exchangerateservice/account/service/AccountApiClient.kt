@@ -40,9 +40,6 @@ class AccountApiClient(
             getAccountServiceApiCall(uri)
     }
 
-    fun getAccountInfoDummy(customerId: String): Mono<AccountInfo> {
-        return Mono.just(AccountInfo("defaultUser", AccountType.FREE))
-    }
     fun getAccountServiceApiCall(uri: String): Mono<AccountInfo> {
         return exchangeRatesApiClient.get()
                 .uri(uri)
