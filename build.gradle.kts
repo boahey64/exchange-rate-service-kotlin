@@ -42,6 +42,14 @@ dependencies {
 	testImplementation("com.nhaarman:mockito-kotlin-kt1.1:1.6.0")
 	testImplementation("com.google.code.gson:gson:2.8.6")
 
+	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.1.1.RELEASE") {
+		exclude(module = "spring-cloud-stream-test-support")
+		exclude(module = "spring-boot-starter-test")
+		exclude(module = "spring-boot-test-autoconfigure")
+		exclude(module = "spring-integration-java-dsl")
+	}
+	testImplementation("io.projectreactor:reactor-test:3.2.10.RELEASE")
+
 }
 
 tasks.withType<Test> {
