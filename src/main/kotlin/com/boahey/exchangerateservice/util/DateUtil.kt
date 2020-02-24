@@ -50,7 +50,7 @@ fun convertDateStringToLocalDate(dateString: String): LocalDate {
     return getLocalDateFromDateTokens(tokens)
 }
 
-fun convertDateToDateString(date: Date?): String? {
+fun convertDateToDateString(date: Date?): String {
     val pattern = "yyyy-MM-dd"
     val simpleDateFormat = SimpleDateFormat(pattern)
     return simpleDateFormat.format(date)
