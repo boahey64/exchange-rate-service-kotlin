@@ -16,13 +16,10 @@ class LandingPage(
     private val environment: Environment
 ) {
 
-    val countries = listOf(
-            Triple("de", "Germany", "\uD83C\uDDE9\uD83C\uDDEA"),
-            Triple("at", "Austria", "\uD83C\uDDE6\uD83C\uDDF9"),
-            Triple("es", "Spain", "\uD83C\uDDEA\uD83C\uDDF8"),
-            Triple("fr", "France", "\uD83C\uDDEB\uD83C\uDDF7"),
-            Triple("it", "Italy", "\uD83C\uDDEE\uD83C\uDDF9"),
-            Triple("uk", "Great Britain", "\uD83C\uDDEC\uD83C\uDDE7")
+    val groups = listOf(
+            Triple("rate", "ExchangeRate", "\uD83C\uDDE9\uD83C\uDDEA"),
+            Triple("history", "ExchangeRateHistory", "\uD83C\uDDE6\uD83C\uDDF9"),
+            Triple("usage", "ExchangeRateUsage", "\uD83C\uDDEA\uD83C\uDDF8")
     )
 
     @GetMapping("/")
@@ -136,12 +133,12 @@ class LandingPage(
                                 }
 
                                 div("content") {
-                                    countries.forEach { country ->
+                                    groups.forEach { country ->
                                         div("button-group") {
                                             span { +"${country.third} ${country.second}" }
                                             br {}
-                                            a("/${country.first}/boahey-demo-list-cookie/e92859b3-6c5d-4231-ae56-1f3c4efe61ce/list", classes = "list-view") {
-                                                +"list"
+                                            a("/exchange-rate/${country.first}", classes = "list-view") {
+                                                +"${country.first}"
                                             }
                                         }
                                     }
