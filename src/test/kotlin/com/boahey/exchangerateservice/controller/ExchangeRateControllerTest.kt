@@ -119,24 +119,25 @@ internal class ExchangeRateControllerTest {
                 .andExpect {
                     status().isOk
                     content().contentType(MediaType.APPLICATION_JSON)
-//                    content { jsonPath( "$", equalTo("{}"))
+                    jsonPath( "$", equalTo("{}"))
+// FIXME                   jsonPath("$.length()", equalTo(4))
+// FIXME                   jsonPath("$.baseCurrency", equalTo(4))
                     }
-//                .andExpect(MockMvcResultMatchers.status().isOk)
-//                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.length()", IsEqual.equalTo(4)))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.baseCurrency", IsEqual.equalTo(4)))
-//                .andExpect(MockMvcResultMatchers.content().string("{}"))
     }
 
-//    @Test
-//    fun get_monthly_history() {
-//        Mockito.`when`(historyService.getMonthlyExchangeApiRates(any())).thenReturn(aHistoricalExchangeRateList())
-//
-//        mockMvc.perform(MockMvcRequestBuilders.get("$path/history/monthly/2020/01"))
-//                .andExpect(MockMvcResultMatchers.status().isOk)
-//                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.length()", IsEqual.equalTo(4)))
-//    }
+    @Test
+    fun get_monthly_history() {
+        Mockito.`when`(historyService.getMonthlyExchangeApiRates(any())).thenReturn(aHistoricalExchangeRateList())
+
+        mockMvc.perform(MockMvcRequestBuilders.get("$path/history/monthly/2020/01"))
+                .andExpect {
+                    status().isOk
+                    content().contentType(MediaType.APPLICATION_JSON)
+                    jsonPath( "$", equalTo("{}"))
+// FIXME                   jsonPath("$.length()", equalTo(4))
+// FIXME                   jsonPath("$.baseCurrency", equalTo(4))
+                }
+    }
 
     private fun aHistoricalLocalExchangeRateList(): List<ExchangeRateQuery>? {
         val jsonString = "  {\n" +
