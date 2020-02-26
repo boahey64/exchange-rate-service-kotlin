@@ -1,10 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.gradle.api.tasks.testing.logging.*
+import com.moowork.gradle.node.yarn.YarnTask
 
 plugins {
 	id("org.springframework.boot") version "2.2.4.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
+
+
+	id("org.gradle.kotlin.kotlin-dsl") version "1.2.9" apply false
+	id("com.moowork.node") version "1.3.1"
+
 	kotlin("jvm") version "1.3.61"
 	kotlin("plugin.spring") version "1.3.61"
 	kotlin("plugin.jpa") version "1.3.61"
@@ -24,6 +30,14 @@ configurations {
 
 repositories {
 	mavenCentral()
+	jcenter()
+}
+
+node {
+	// PLEASE use node LTS version or version with even major number
+	version = "12.13.0"
+	yarnVersion = "1.19.1"
+	download = true
 }
 
 dependencies {
@@ -37,6 +51,11 @@ dependencies {
 	implementation("com.google.code.gson:gson:2.8.6")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
+
+	implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.12")
+	implementation("org.jetbrains.kotlin:kotlin-reflect:1.1.51")
+
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
@@ -94,4 +113,36 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
 	}
+}
+
+sourceSets {
+	getByName("main") {
+		output.dir(mapOf("builtBy" to "bundle"), "build/parcel")
+	}
+}
+
+tasks {
+	val bootRun by getting(org.springframework.boot.gradle.tasks.run.BootRun::class) {
+		sourceResources(sourceSets["main"])
+
+		jvmArgs = listOf("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005")
+	}
+
+	val bundle by registering(YarnTask::class) {
+		description = "bundle the React Application"
+		group = "Build"
+
+		dependsOn("yarn_install")
+		args = listOf("run", "bundle")
+
+		inputs.dir("$projectDir/src/main/assets").withPathSensitivity(PathSensitivity.RELATIVE)
+		inputs.dir("$projectDir/src/main/scss").withPathSensitivity(PathSensitivity.RELATIVE)
+		inputs.dir("$projectDir/src/main/react").withPathSensitivity(PathSensitivity.RELATIVE)
+		inputs.file("$projectDir/package.json").withPathSensitivity(PathSensitivity.RELATIVE)
+		inputs.file("$projectDir/yarn.lock").withPathSensitivity(PathSensitivity.RELATIVE)
+
+		outputs.dir("$buildDir/parcel/static/exchange-rate-service-kotlin/dist").withPropertyName("parcel")
+		outputs.cacheIf { true }
+	}
+
 }
