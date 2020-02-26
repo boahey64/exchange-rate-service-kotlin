@@ -24,7 +24,6 @@ class ExchangeRateController(
             @RequestParam(defaultValue = "defaultUser") customerId: String?,
             @RequestParam(defaultValue = "false") randomQueryDate: Boolean?
     ): ExchangeRate? {
-
         val exchangeRateInput = ExchangeRateInput(date, baseCurrency, targetCurrency)
         val optionalExchangeRate: Optional<ExchangeRate>? = exchangeRateService.getExchangeData(
                 exchangeRateInput, customerId!!, randomQueryDate!!)
@@ -35,22 +34,40 @@ class ExchangeRateController(
     }
 
     @GetMapping("/history/local/daily/{yyyy}/{MM}/{dd}")
-    fun getDailyHistoryLocal(historyDate: HistoryDate): List<ExchangeRateQuery?>? {
+    fun getDailyHistoryLocal(
+            @PathVariable yyyy: String,
+            @PathVariable MM: String,
+            @PathVariable dd: String
+    ): List<ExchangeRateQuery?>? {
+        val historyDate = HistoryDate(yyyy, MM, dd)
         return historyService.getDailyExchangeRateQueriesLocal(historyDate)
     }
 
     @GetMapping("/history/local/monthly/{yyyy}/{MM}")
-    fun getMonthlyHistoryLocal(historyDate: HistoryDate?): List<ExchangeRateQuery?>? {
+    fun getMonthlyHistoryLocal(
+            @PathVariable yyyy: String,
+            @PathVariable MM: String
+    ): List<ExchangeRateQuery?>? {
+        val historyDate = HistoryDate(yyyy, MM)
         return historyService.getMonthlyExchangeRateQueriesLocal(historyDate)
     }
 
     @GetMapping("/history/daily/{yyyy}/{MM}/{dd}")
-    fun getDailyHistory(historyDate: HistoryDate?): ExchangeApiRatesHistory? {
+    fun getDailyHistory(
+            @PathVariable yyyy: String,
+            @PathVariable MM: String,
+            @PathVariable dd: String
+    ): ExchangeApiRatesHistory? {
+        val historyDate = HistoryDate(yyyy, MM, dd)
         return historyService.getDailyExchangeApiRates(historyDate)
     }
 
     @GetMapping("/history/monthly/{yyyy}/{MM}")
-    fun getMonthlyHistory(historyDate: HistoryDate?): ExchangeApiRatesHistory? {
+    fun getMonthlyHistory(
+            @PathVariable yyyy: String,
+            @PathVariable MM: String
+    ): ExchangeApiRatesHistory? {
+        val historyDate = HistoryDate(yyyy, MM)
         return historyService.getMonthlyExchangeApiRates(historyDate)
     }
 
