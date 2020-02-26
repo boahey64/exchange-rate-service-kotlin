@@ -5,10 +5,7 @@ import com.boahey.exchangerateservice.exception.NotExpectedErrorException
 import com.boahey.exchangerateservice.model.*
 import com.boahey.exchangerateservice.service.ExchangeRateService
 import com.boahey.exchangerateservice.service.HistoryService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
@@ -21,10 +18,14 @@ class ExchangeRateController(
 
     @GetMapping("/{date}/{baseCurrency}/{targetCurrency}")
     fun getExchangeRate(
-            exchangeRateInput: ExchangeRateInput,
+            @PathVariable date: String,
+            @PathVariable baseCurrency: String,
+            @PathVariable targetCurrency: String,
             @RequestParam(defaultValue = "defaultUser") customerId: String?,
             @RequestParam(defaultValue = "false") randomQueryDate: Boolean?
     ): ExchangeRate? {
+
+        val exchangeRateInput = ExchangeRateInput(date, baseCurrency, targetCurrency)
         val optionalExchangeRate: Optional<ExchangeRate>? = exchangeRateService.getExchangeData(
                 exchangeRateInput, customerId!!, randomQueryDate!!)
         if (optionalExchangeRate!!.isPresent()) {
