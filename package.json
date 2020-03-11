@@ -37,6 +37,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "expect": "^24.9.0",
@@ -44,5 +46,15 @@
     "moxios": "^0.4.0",
     "redux-mock-store": "^1.5.3",
     "wiremock-standalone": "^2.25.0-1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env"
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
   }
 }
