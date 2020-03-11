@@ -20,10 +20,12 @@ class ExchangeRateQuery extends React.Component {
 
         const exchangeRate = this.props.item;
         console.log("exchangeRate: " + exchangeRate);
+
+        const temp = "my temp";
         return (
-            <ul>
-                {exchangeRate}
-            </ul>
+            <div>
+                {temp} ABC {exchangeRate}
+            </div>
         );
     }
 }
