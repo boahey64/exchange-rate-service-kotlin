@@ -27,6 +27,7 @@ fun renderTemplate(demoListMeta: DemoListMeta, content: BODY.() -> Unit) = creat
         // wish list data as JSON rendered by react
         meta(name = "reactModel", content = demoListMeta.reactModel)
 
+        link(rel = "shortcut icon", href = "/favicon.ico")
 
         // https://www.filamentgroup.com/lab/load-css-simpler/
         link(rel = "preload", href = PATH_CSS) {

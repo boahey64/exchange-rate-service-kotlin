@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchToDos } from "./action"
+import { fetchExchangeRate } from "./action"
 
 class ExchangeRateQuery extends React.Component {
     componentDidMount() {
-        this.props.dispatch(fetchToDos());
+        this.props.dispatch(fetchExchangeRate());
     }
 
     render() {
         const { error, loading } = this.props;
-
+        console.log("props: " + this.props.currentRate);
         if (error) {
             return <div>Error! {error.message}</div>;
         }
@@ -18,20 +18,18 @@ class ExchangeRateQuery extends React.Component {
             return <div>Loading...</div>;
         }
 
-        const last5ToDos = this.props.items.filter(item => item.id < 6);
-
+        const exchangeRate = this.props.item;
+        console.log("exchangeRate: " + exchangeRate);
         return (
             <ul>
-                    {last5ToDos.map(item =>
-                        <li key={item.id}>{item.id} {item.title} {item.completed}</li>
-                    )}
+                {exchangeRate}
             </ul>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    items: state.items,
+    currentRate: state.currentRate,
     loading: state.loading,
     error: state.error
 });
