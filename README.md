@@ -70,6 +70,14 @@
 ### h2 console (user: sa, password: )
     http://localhost:8080/h2-console    
     
+## frontend development
+### bundle
+    yarn bundle
+### watch
+    yarn watch    
+### start wiremock
+    yarn wiremock    
+
             
 ## ToDO's
 * RestTemplate vs. WebClient (/) 
