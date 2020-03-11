@@ -1,7 +1,4 @@
 import {
-    increment,
-    decrement,
-    reset,
     fetchToDos,
     FETCH_TODOS_SUCCESS,
     FETCH_TODOS_BEGIN
@@ -22,18 +19,6 @@ describe("actions", () => {
 
     afterEach(function () {
         moxios.uninstall();
-    });
-
-    it("triggers increment", () => {
-        expect(increment()).toEqual({ type: "INCREMENT" });
-    });
-
-    it("triggers decrement", () => {
-        expect(decrement()).toEqual({ type: "DECREMENT" });
-    });
-
-    it("triggers reset", () => {
-        expect(reset()).toEqual({ type: "RESET" });
     });
 
     // https://medium.com/@netxm/test-async-redux-actions-jest-e703add2cf91

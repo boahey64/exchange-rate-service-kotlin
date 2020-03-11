@@ -1,18 +1,5 @@
 import axios from "axios";
 
-export const INCREMENT = "INCREMENT";
-export const DECREMENT = "DECREMENT";
-export const RESET = "RESET";
-
-
-export function increment() {
-    return { type: INCREMENT };
-}
-
-export const decrement = () => ({ type: DECREMENT });
-
-export const reset = () => ( {type: RESET });
-
 export function fetchToDos() {
     // https://javascript.info/async-await
     // https://medium.com/javascript-in-plain-english/async-await-javascript-5038668ec6eb
