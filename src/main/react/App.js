@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import ToDo from "./ToDo";
 import ExchangeRateQuery from "./ExchangeRateQuery";
+import ExchangeRateInput from "./ExchangeRateInput";
 
 
 // Redux DevTools setup: https://github.com/zalmoxisus/redux-devtools-extension
@@ -36,7 +37,7 @@ function App() {
             <div>
                 <h2>Page Title</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    <ExchangeRateInput/>
                 </p>
             </div>
             <div class="sub-content">
