@@ -22,13 +22,63 @@ const state = createStore(
 function App() {
   return (
     <Provider store={state}>
-        <div className="App">
-            <section>
-                <img src={logo} className="App-logo" alt="logo" />
-                <ToDo/>
+        <header class="i-header">
+            <h1 class="headline">Logo</h1>
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                </ul>
+            </nav>
+        </header>
+        <main class="main">
+            <div>
+                <h2>Page Title</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+            </div>
+            <div class="sub-content">
+                <h3>Subtitle</h3>
                 <ExchangeRateQuery/>
-            </section>
-         </div>
+            </div>
+        </main>
+        <aside>
+            <div>
+                <h3>Sidebar Content0</h3>
+                <ToDo/>
+            </div>
+            <div>
+                <h3>Sidebar Content1</h3>
+                <ul>
+                    <li>sequi totam</li>
+                    <li>praesentium perferendis</li>
+                    <li>nihil aliquid</li>
+                    <li>praesentium odio illo</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Sidebar Content2</h3>
+                <ul>
+                    <li>sequi totam</li>
+                    <li>praesentium perferendis</li>
+                    <li>nihil aliquid</li>
+                    <li>praesentium odio illo</li>
+                </ul>
+            </div>
+        </aside>
+        <footer>
+            <div class="footer-content">
+                <nav>
+                    <ul>
+                        <li>Home</li>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
     </Provider>
   );
 }

@@ -30,13 +30,14 @@ fun renderTemplate(demoListMeta: DemoListMeta, content: BODY.() -> Unit) = creat
         link(rel = "shortcut icon", href = "/favicon.ico")
 
         // https://www.filamentgroup.com/lab/load-css-simpler/
-        link(rel = "preload", href = PATH_CSS) {
+        link(rel = "stylesheet", href = PATH_CSS)
+        {
             attributes["as"] = "style"
         }
-        link(rel = "stylesheet", href = PATH_CSS) {
-            attributes["media"] = "print"
-            attributes["onload"] = "this.media='all'"
-        }
+//        link(rel = "stylesheet", href = PATH_CSS) {
+//            attributes["media"] = "print"
+//            attributes["onload"] = "this.media='all'"
+//        }
     }
 
     body {

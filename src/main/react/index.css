@@ -1,13 +1,117 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    padding: 5%;
+    background-color: #DDFFDD;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.i-header {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #DDDDFF;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
+
+.i-header ul {
+    margin-top: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.i-header li {
+    margin-left: 10px;
+}
+
+.container {
+    line-height: 1.6;
+    font-size: 14px;
+    padding: 30px;
+    background-color: #FFFFFF;
+}
+
+header .headline {
+    text-align: center;
+    color: #009999;
+}
+
+.horizontal-line {
+    border-top: 2px solid #DDDDFF;
+}
+
+header ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+header li {
+    grid-template-rows: repeat(4, 40px);
+    grid-gap: 10px;
+    border-radius: 5px;
+    background-color: #FFDDDD;
+    color: #FF0000;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    margin: 0 0 5px 0;
+}
+
+main {
+    padding: 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #DDFFFF;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+main h2 {
+    color: #009999;
+}
+
+main .sub-content h3 {
+    color: #009999;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0;
+}
+
+main .sub-content {
+    /*border-color: red;*/
+    /*border-style: solid;*/
+    padding-left: 20px;
+}
+
+main .sub-content ul {
+    /*border-color: green;*/
+    /*border-style: solid;*/
+    margin: 10px;
+    padding: 0;
+}
+
+aside {
+    padding: 5%;
+    margin-bottom: 20px;
+    background-color: #FFFFDD;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+aside h3 {
+    color: #009999;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: #FFDDAA;
+    color: #FF0000;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+

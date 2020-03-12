@@ -3,6 +3,7 @@ package com.boahey.exchangerateservice.controller.mainpage.templates
 import com.boahey.exchangerateservice.controller.mainpage.templates.common.simpleSpinner
 import kotlinx.html.div
 import kotlinx.html.id
+import kotlinx.html.span
 import kotlinx.html.style
 
 fun renderDemoList(meta: DemoListMeta): String =
