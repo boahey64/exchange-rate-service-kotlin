@@ -1,8 +1,14 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchExchangeRate } from "./action"
 import styled from "styled-components";
 import colors from "./util/colors";
+
+type ItemProps = {
+    onCalculateExchangeRate: () => void
+};
 
 const StyledInput = styled.input`
     appearance: none;
@@ -13,7 +19,7 @@ const StyledInput = styled.input`
     height: 40px;
     margin-bottom: 0;
     padding: 10px;
-    width: 100%;
+    width: 30%;
 
     &:focus {
         outline: none;
@@ -39,9 +45,14 @@ const StyledInput = styled.input`
     }
 `;
 
+
 class ExchangeRateInput extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchExchangeRate());
+    }
+
+    handleButtonClick(param) {
+        console.log("handleButtonClick: " + param);
     }
 
     render() {
@@ -68,7 +79,7 @@ class ExchangeRateInput extends React.Component {
 //                        />
 //
         return (
-                    <div className="search-field">
+                    <div className="input-field">
                         <StyledInput
                             autoComplete="off"
                         />
@@ -78,6 +89,9 @@ class ExchangeRateInput extends React.Component {
                         <StyledInput
                             autoComplete="off"
                         />
+                        <div>
+                            <button onClick={() => this.handleButtonClick("column")}>submit</button>
+                        </div>
                     </div>
         );
     }
