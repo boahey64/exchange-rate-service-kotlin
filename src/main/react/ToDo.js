@@ -19,7 +19,7 @@ class ToDo extends React.Component {
         }
 
         const last5ToDos = this.props.items.filter(item => item.id < 6);
-
+        console.log("last5ToDos: " + last5ToDos);
         return (
             <ul>
                     {last5ToDos.map(item =>
