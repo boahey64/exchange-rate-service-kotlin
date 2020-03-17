@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { fetchExchangeRate } from "./action"
 
 class ExchangeRateResult extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(fetchExchangeRate());
-    }
 
     render() {
         const { error, loading } = this.props;
@@ -19,26 +16,50 @@ class ExchangeRateResult extends React.Component {
         }
 
         const exchangeRate = this.props.item;
+        const query = this.props.query;
         console.log("exchangeRate: " + exchangeRate);
 
         return (
             <div>
-                <div class="result-label">
-                    Current Rate:
-                    <div class="result">
-                        {exchangeRate.currentRate}
+                <div>
+                    <div class="input-label">
+                        Base Currency:
+                        <div>
+                            {query.baseCurrency}
+                        </div>
+                    </div>
+                    <div class="input-label">
+                        Target Currency:
+                        <div>
+                            {query.targetCurrency}
+                        </div>
+                    </div>
+                    <div class="input-label">
+                        Date:
+                        <div>
+                            {query.date}
+                        </div>
                     </div>
                 </div>
-                <div class="result-label">
-                    Average Rate:
-                    <div class="result">
-                        {exchangeRate.averageRate}
+                <br/>
+                <div>
+                    <div class="result-label">
+                        Current Rate:
+                        <div class="result">
+                            {exchangeRate.currentRate}
+                        </div>
                     </div>
-                </div>
-                <div class="result-label">
-                    Trend:
-                    <div class="result">
-                        {exchangeRate.trend}
+                    <div class="result-label">
+                        Average Rate:
+                        <div class="result">
+                            {exchangeRate.averageRate}
+                        </div>
+                    </div>
+                    <div class="result-label">
+                        Trend:
+                        <div class="result">
+                            {exchangeRate.trend}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,6 +69,7 @@ class ExchangeRateResult extends React.Component {
 
 const mapStateToProps = state => ({
     item: state.item,
+    query: state.query,
     loading: state.loading,
     error: state.error
 });

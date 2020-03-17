@@ -11,6 +11,11 @@ const initialState = {
     count: 0,
     items: [],
     item: {},
+    query: {
+        baseCurrency: 'EUR',
+        targetCurrency: 'USD',
+        date: '2019-12-24',
+    },
     loading: false,
     error: null
 };
