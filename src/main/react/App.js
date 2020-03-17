@@ -35,13 +35,13 @@ function App() {
         </header>
         <main class="main">
             <div>
-                <h2>Page Title</h2>
+                <h2>Query Parameter</h2>
                 <p>
                     <ExchangeRateQueryForm/>
                 </p>
             </div>
             <div class="sub-content">
-                <h3>Subtitle</h3>
+                <h3>Result</h3>
                 <ExchangeRateResult/>
             </div>
         </main>

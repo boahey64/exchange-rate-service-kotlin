@@ -89,6 +89,16 @@ main .sub-content ul {
     padding: 0;
 }
 
+main .input-field {
+    width: 90px;
+}
+
+main .input-label {
+    width: 230px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 aside {
     padding: 5%;
     margin-bottom: 20px;
