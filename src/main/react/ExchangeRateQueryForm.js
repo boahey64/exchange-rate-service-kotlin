@@ -26,9 +26,6 @@ class ExchangeRateQueryForm extends React.Component {
     this.setState({
       [name]: value
     });
-    props.query.baseCurrency = this.state.baseCurrency;
-    props.query.targetCurrency = this.state.targetCurrency;
-    props.query.date = this.state.date;
 
     console.log('name: ' + name  + ' value: ' + value);
   }
@@ -39,6 +36,10 @@ class ExchangeRateQueryForm extends React.Component {
     console.log(' targetCurrency: ' + this.state.targetCurrency);
     console.log(' date: ' + this.state.date);
     event.preventDefault();
+
+    this.props.query.baseCurrency = this.state.baseCurrency;
+    this.props.query.targetCurrency = this.state.targetCurrency;
+    this.props.query.date = this.state.date;
 
     this.props.dispatch(fetchExchangeRate(this.state.date, this.state.baseCurrency, this.state.targetCurrency));
   }
