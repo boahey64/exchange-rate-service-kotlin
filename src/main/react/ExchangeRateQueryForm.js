@@ -31,12 +31,12 @@ class ExchangeRateQueryForm extends React.Component {
 
   handleSubmit(event) {
     console.log('handleSubmit:');
-//    alert('Base Currency is: ' + this.state.baseCurrency);
-//    console.log('baseCurrency: {}', this.state.baseCurrency);
     console.log(' baseCurrency: ' + this.state.baseCurrency);
     console.log(' targetCurrency: ' + this.state.targetCurrency);
     console.log(' date: ' + this.state.date);
     event.preventDefault();
+
+    this.props.dispatch(fetchExchangeRate(this.state.date, this.state.baseCurrency, this.state.targetCurrency));
   }
 
   render() {
