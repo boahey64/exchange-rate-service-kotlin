@@ -22,11 +22,26 @@ class ExchangeRateResult extends React.Component {
         console.log("exchangeRate: " + exchangeRate);
 
         return (
-            <ul>
-                <li>Current Rate: {exchangeRate.currentRate}</li>
-                <li>Average Rate: {exchangeRate.averageRate}</li>
-                <li>Trend: {exchangeRate.trend}</li>
-            </ul>
+            <div>
+                <div class="result-label">
+                    Current Rate:
+                    <div class="result">
+                        {exchangeRate.currentRate}
+                    </div>
+                </div>
+                <div class="result-label">
+                    Average Rate:
+                    <div class="result">
+                        {exchangeRate.averageRate}
+                    </div>
+                </div>
+                <div class="result-label">
+                    Trend:
+                    <div class="result">
+                        {exchangeRate.trend}
+                    </div>
+                </div>
+            </div>
         );
     }
 }

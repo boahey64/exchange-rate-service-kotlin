@@ -99,6 +99,17 @@ main .input-label {
     grid-template-columns: 1fr 1fr;
 }
 
+main .result-label {
+    width: 230px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+main .result {
+    width: 90px;
+    color: green;
+}
+
 aside {
     padding: 5%;
     margin-bottom: 20px;
