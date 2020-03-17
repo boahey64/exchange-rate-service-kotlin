@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchExchangeRate } from "./action"
 
-class ExchangeRateQuery extends React.Component {
+class ExchangeRateResult extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchExchangeRate());
     }
@@ -37,4 +37,4 @@ const mapStateToProps = state => ({
     error: state.error
 });
 
-export default connect(mapStateToProps)(ExchangeRateQuery);
+export default connect(mapStateToProps)(ExchangeRateResult);

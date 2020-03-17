@@ -6,8 +6,8 @@ import { reducer } from "./reducer";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import ToDo from "./ToDo";
-import ExchangeRateQuery from "./ExchangeRateQuery";
 import ExchangeRateInput from "./ExchangeRateInput";
+import ExchangeRateResult from "./ExchangeRateResult";
 
 
 // Redux DevTools setup: https://github.com/zalmoxisus/redux-devtools-extension
@@ -42,7 +42,7 @@ function App() {
             </div>
             <div class="sub-content">
                 <h3>Subtitle</h3>
-                <ExchangeRateQuery/>
+                <ExchangeRateResult/>
             </div>
         </main>
         <aside>
