@@ -6,7 +6,7 @@ import { reducer } from "./reducer";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import ToDo from "./ToDo";
-import ExchangeRateInput from "./ExchangeRateInput";
+import ExchangeRateQueryForm from "./ExchangeRateQueryForm";
 import ExchangeRateResult from "./ExchangeRateResult";
 
 
@@ -37,7 +37,7 @@ function App() {
             <div>
                 <h2>Page Title</h2>
                 <p>
-                    <ExchangeRateInput/>
+                    <ExchangeRateQueryForm/>
                 </p>
             </div>
             <div class="sub-content">

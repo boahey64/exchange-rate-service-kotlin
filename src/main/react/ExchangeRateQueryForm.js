@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchExchangeRate } from "./action"
 
-class ExchangeRateInput extends React.Component {
+class ExchangeRateQueryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,4 +80,4 @@ const mapStateToProps = state => ({
     error: state.error
 });
 
-export default connect(mapStateToProps)(ExchangeRateInput);
+export default connect(mapStateToProps)(ExchangeRateQueryForm);
