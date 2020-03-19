@@ -8,10 +8,16 @@ export function fetchExchangeRate(date, baseCurrency, targetCurrency) {
 
         const currencyServiceUrl = "http://localhost:8080/api/exchange-rate/"+date+"/"+baseCurrency+"/"+targetCurrency;
 
-        const response = await axios(currencyServiceUrl);
-        console.log("response: " + response.data.currentRate);
-        dispatch(fetchExchangeRateSuccess(response.data));
-        return response.data;
+        return await axios.get(currencyServiceUrl)
+            .then(res => {
+                dispatch(fetchExchangeRateSuccess(res.data));
+            })
+            .catch(err => {
+                dispatch(fetchExchangeRateFailure(err));
+            });
+        // console.log("response: " + response.data);
+        // dispatch(fetchExchangeRateSuccess(response.data));
+        // return response.data;
     };
 }
 

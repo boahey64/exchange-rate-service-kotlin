@@ -5,6 +5,7 @@ class ExchangeRateResult extends React.Component {
 
     render() {
         const { error, loading } = this.props;
+        console.log('error: ' + error);
         console.log("props: " + this.props.item);
         if (error) {
             return <div>Error! {error.message}</div>;
