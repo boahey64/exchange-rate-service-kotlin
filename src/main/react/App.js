@@ -24,8 +24,8 @@ const state = createStore(
 function App() {
   return (
     <Provider store={state}>
-        <header class="i-header">
-            <h1 class="headline">Logo</h1>
+        <header className="i-header">
+            <h1 className="headline">Logo</h1>
             <nav>
                 <ul>
                     <li>Home</li>
@@ -34,14 +34,12 @@ function App() {
                 </ul>
             </nav>
         </header>
-        <main class="main">
+        <main className="main">
             <div>
                 <h2>Query Parameter</h2>
-                <p>
-                    <ExchangeRateQueryForm/>
-                </p>
+                <ExchangeRateQueryForm/>
             </div>
-            <div class="sub-content">
+            <div className="sub-content">
                 <h3>Result</h3>
                 <ExchangeRateResult/>
             </div>
@@ -57,7 +55,7 @@ function App() {
             </div>
         </aside>
         <footer>
-            <div class="footer-content">
+            <div className="footer-content">
                 <nav>
                     <ul>
                         <li>Home</li>

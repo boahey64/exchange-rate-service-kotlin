@@ -49,9 +49,9 @@ class HistoryQueryForm extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <br />
-            <label class="input-label">
+            <label className="input-label">
               Date:
-              <input class="input-field"
+              <input className="input-field"
                 name="date"
                 value={this.state.date}
                 onChange={this.handleInputChange} />

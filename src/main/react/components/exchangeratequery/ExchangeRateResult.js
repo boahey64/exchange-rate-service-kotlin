@@ -21,19 +21,19 @@ class ExchangeRateResult extends React.Component {
         return (
             <div>
                 <div>
-                    <div class="input-label">
+                    <div className="input-label">
                         Base Currency:
                         <div>
                             {query.baseCurrency}
                         </div>
                     </div>
-                    <div class="input-label">
+                    <div className="input-label">
                         Target Currency:
                         <div>
                             {query.targetCurrency}
                         </div>
                     </div>
-                    <div class="input-label">
+                    <div className="input-label">
                         Date:
                         <div>
                             {query.date}
@@ -42,21 +42,21 @@ class ExchangeRateResult extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    <div class="result-label">
+                    <div className="result-label">
                         Current Rate:
-                        <div class="result">
+                        <div className="result">
                             {exchangeRate.currentRate}
                         </div>
                     </div>
-                    <div class="result-label">
+                    <div className="result-label">
                         Average Rate:
-                        <div class="result">
+                        <div className="result">
                             {exchangeRate.averageRate}
                         </div>
                     </div>
-                    <div class="result-label">
+                    <div className="result-label">
                         Trend:
-                        <div class="result">
+                        <div className="result">
                             {exchangeRate.trend}
                         </div>
                     </div>

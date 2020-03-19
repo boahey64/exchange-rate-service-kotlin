@@ -59,25 +59,25 @@ class ExchangeRateQueryForm extends React.Component {
     return (
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label class="input-label">
+            <label className="input-label">
               Base Currency:
-              <input class="input-field"
+              <input className="input-field"
                 name="baseCurrency"
                 value={this.state.baseCurrency}
                 onChange={this.handleInputChange} />
             </label>
             <br />
-            <label class="input-label">
+            <label className="input-label">
               Target Currency:
-              <input class="input-field"
+              <input className="input-field"
                 name="targetCurrency"
                 value={this.state.targetCurrency}
                 onChange={this.handleInputChange} />
             </label>
             <br />
-            <label class="input-label">
+            <label className="input-label">
               Date:
-              <input class="input-field"
+              <input className="input-field"
                 name="date"
                 value={this.state.date}
                 onChange={this.handleInputChange} />
