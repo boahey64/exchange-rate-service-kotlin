@@ -1,4 +1,29 @@
 # exchange-rate-service
+    
+## build and run
+
+### build
+    ./gradlew build    
+
+### run
+    ./gradlew bootRun
+    
+## database
+
+### connection string
+    jdbc:h2:mem:testdb
+    
+### h2 console (user: sa, password: )
+    http://localhost:8080/h2-console    
+    
+## frontend development
+
+### bundle
+    yarn bundle
+### watch
+    yarn watch    
+### start wiremock
+    yarn wiremock    
 
 ## REST API
 
@@ -53,31 +78,7 @@
       }
     }
 ### historical data
-    GET https://api.exchangeratesapi.io/history?start_at=2018-01-01&end_at=2018-09-01 HTTP/1.1
-    
-## build and run
-
-### build
-    ./mvnw clean verify    
-
-### run
-    ./mvnw spring-boot:run    
-    
-## database
-### connection string
-    jdbc:h2:mem:testdb
-    
-### h2 console (user: sa, password: )
-    http://localhost:8080/h2-console    
-    
-## frontend development
-### bundle
-    yarn bundle
-### watch
-    yarn watch    
-### start wiremock
-    yarn wiremock    
-
+    GET https://api.exchangeratesapi.io/history?start_at=2018-01-01&end_at=2018-09-01 HTTP/1.1    
             
 ## ToDO's
 * RestTemplate vs. WebClient (/) 
