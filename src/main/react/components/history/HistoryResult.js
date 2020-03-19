@@ -3,17 +3,6 @@ import { connect } from 'react-redux';
 import { fetchExchangeRateHistory } from "./action";
 
 class HistoryResult extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: props.historyQuery.date,
-        };
-    }
-
-    componentDidMount() {
-        this.props.dispatch(fetchExchangeRateHistory(this.state.date));
-    }
-
     render() {
         const { error, loading } = this.props;
         console.log("history props: " + this.props.items);

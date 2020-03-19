@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchExchangeRate } from "./action";
+import {fetchExchangeRateHistory} from "../history/action";
 
 class ExchangeRateQueryForm extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class ExchangeRateQueryForm extends React.Component {
       baseCurrency: props.query.baseCurrency,
       targetCurrency: props.query.targetCurrency,
       date: props.query.date,
+      historyQuery: props.historyQuery,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,7 +43,16 @@ class ExchangeRateQueryForm extends React.Component {
     this.props.query.targetCurrency = this.state.targetCurrency;
     this.props.query.date = this.state.date;
 
+    const convertedDate = this.state.date.replace('-', '/').replace('-', '/');
+    console.log("convertedDate: " + convertedDate);
+    this.props.historyQuery.date = 'daily/'+convertedDate;
+    console.log("convertedDate historyQuery: " + this.props.historyQuery.date);
+
+    console.log('before fetchExchangeRate');
     this.props.dispatch(fetchExchangeRate(this.state.date, this.state.baseCurrency, this.state.targetCurrency));
+    console.log('fetchExchangeRate');
+    this.props.dispatch(fetchExchangeRateHistory(this.props.historyQuery.date));
+    console.log('fetchExchangeRateHistory');
   }
 
   render() {
@@ -82,6 +93,7 @@ class ExchangeRateQueryForm extends React.Component {
 const mapStateToProps = state => ({
     item: state.item,
     query: state.query,
+    historyQuery: state.historyQuery,
     loading: state.loading,
     error: state.error
 });

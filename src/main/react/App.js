@@ -48,11 +48,11 @@ function App() {
         </main>
         <aside>
             <div>
-                <h3>Result</h3>
+                <h3>History Query</h3>
                 <HistoryQueryForm/>
             </div>
             <div>
-                <h3>History</h3>
+                <h3>History Result</h3>
                 <HistoryResult/>
             </div>
         </aside>
