@@ -47,26 +47,16 @@ function App() {
         </main>
         <aside>
             <div>
-                <h3>Sidebar Content0</h3>
-                <ToDo/>
+                <h3>Result</h3>
+                <ExchangeRateResult/>
             </div>
             <div>
-                <h3>Sidebar Content1</h3>
-                <ul>
-                    <li>sequi totam</li>
-                    <li>praesentium perferendis</li>
-                    <li>nihil aliquid</li>
-                    <li>praesentium odio illo</li>
-                </ul>
+                <h3>History</h3>
+                <ExchangeRateResult/>
             </div>
             <div>
                 <h3>Sidebar Content2</h3>
-                <ul>
-                    <li>sequi totam</li>
-                    <li>praesentium perferendis</li>
-                    <li>nihil aliquid</li>
-                    <li>praesentium odio illo</li>
-                </ul>
+                <ToDo/>
             </div>
         </aside>
         <footer>

@@ -122,6 +122,17 @@ aside h3 {
     color: #009999;
 }
 
+aside .result-label {
+    width: 230px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+aside .result {
+    width: 90px;
+    color: green;
+}
+
 footer ul {
     margin: 0;
     padding: 0;
