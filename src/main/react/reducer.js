@@ -1,8 +1,3 @@
-import {
-    FETCH_TODOS_BEGIN,
-    FETCH_TODOS_SUCCESS,
-    FETCH_TODOS_FAILURE,
-} from './action';
 
 import {
     FETCH_EXCHANGE_RATE_BEGIN,
@@ -10,14 +5,23 @@ import {
     FETCH_EXCHANGE_RATE_FAILURE,
 } from './components/exchangeratequery/action';
 
+import {
+    FETCH_EXCHANGE_RATE_HISTORY_BEGIN,
+    FETCH_EXCHANGE_RATE_HISTORY_SUCCESS,
+    FETCH_EXCHANGE_RATE_HISTORY_FAILURE,
+} from './components/history/action';
+
 const initialState = {
     count: 0,
     items: [],
+    historyQuery: {
+        date: 'monthly/2020/01',
+    },
     item: {},
     query: {
         baseCurrency: 'EUR',
         targetCurrency: 'USD',
-        date: '2019-12-24',
+        date: '2020-01-24',
     },
     loading: false,
     error: null
@@ -42,27 +46,6 @@ export function reducer(state = initialState, action) {
                 ...state,
                 count: 0
             };
-        case FETCH_TODOS_BEGIN:
-            return {
-                ...state,
-                loading: true,
-                error: null
-            };
-
-        case FETCH_TODOS_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                items: action.payload.items
-            };
-
-        case FETCH_TODOS_FAILURE:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload.error,
-                items: []
-            };
         case FETCH_EXCHANGE_RATE_BEGIN:
             return {
                 ...state,
@@ -83,6 +66,27 @@ export function reducer(state = initialState, action) {
                 loading: false,
                 error: action.payload.error,
                 item: {}
+            };
+        case FETCH_EXCHANGE_RATE_HISTORY_BEGIN:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+
+        case FETCH_EXCHANGE_RATE_HISTORY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                items: action.payload.items
+            };
+
+        case FETCH_EXCHANGE_RATE_HISTORY_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.error,
+                items: []
             };
         default:
             return state;

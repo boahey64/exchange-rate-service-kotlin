@@ -5,9 +5,10 @@ import { Provider } from 'react-redux';
 import { reducer } from "./reducer";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import ToDo from "./ToDo";
 import ExchangeRateQueryForm from "./components/exchangeratequery/ExchangeRateQueryForm";
 import ExchangeRateResult from "./components/exchangeratequery/ExchangeRateResult";
+import HistoryResult from "./components/history/HistoryResult";
+import HistoryQueryForm from "./components/history/HistoryQueryForm";
 
 
 // Redux DevTools setup: https://github.com/zalmoxisus/redux-devtools-extension
@@ -48,15 +49,11 @@ function App() {
         <aside>
             <div>
                 <h3>Result</h3>
-                <ExchangeRateResult/>
+                <HistoryQueryForm/>
             </div>
             <div>
                 <h3>History</h3>
-                <ExchangeRateResult/>
-            </div>
-            <div>
-                <h3>Sidebar Content2</h3>
-                <ToDo/>
+                <HistoryResult/>
             </div>
         </aside>
         <footer>
