@@ -6,8 +6,8 @@ import { reducer } from "./reducer";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import ToDo from "./ToDo";
-import ExchangeRateQueryForm from "./ExchangeRateQueryForm";
-import ExchangeRateResult from "./ExchangeRateResult";
+import ExchangeRateQueryForm from "./components/exchangeratequery/ExchangeRateQueryForm";
+import ExchangeRateResult from "./components/exchangeratequery/ExchangeRateResult";
 
 
 // Redux DevTools setup: https://github.com/zalmoxisus/redux-devtools-extension

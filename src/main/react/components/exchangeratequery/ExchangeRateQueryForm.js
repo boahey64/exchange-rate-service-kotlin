@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchExchangeRate } from "./action"
+import { fetchExchangeRate } from "./action";
 
 class ExchangeRateQueryForm extends React.Component {
   constructor(props) {

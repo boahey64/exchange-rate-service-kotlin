@@ -2,10 +2,13 @@ import {
     FETCH_TODOS_BEGIN,
     FETCH_TODOS_SUCCESS,
     FETCH_TODOS_FAILURE,
+} from './action';
+
+import {
     FETCH_EXCHANGE_RATE_BEGIN,
     FETCH_EXCHANGE_RATE_SUCCESS,
-    FETCH_EXCHANGE_RATE_FAILURE
-} from './action';
+    FETCH_EXCHANGE_RATE_FAILURE,
+} from './components/exchangeratequery/action';
 
 const initialState = {
     count: 0,

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchExchangeRate } from "./action"
 
 class ExchangeRateResult extends React.Component {
 
