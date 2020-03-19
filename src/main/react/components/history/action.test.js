@@ -1,7 +1,7 @@
 import {
-    fetchToDos,
-    FETCH_TODOS_SUCCESS,
-    FETCH_TODOS_BEGIN
+    fetchExchangeRateHistory,
+    FETCH_EXCHANGE_RATE_HISTORY_SUCCESS,
+    FETCH_EXCHANGE_RATE_HISTORY_BEGIN
 } from "./action";
 
 import configureMockStore from 'redux-mock-store';
@@ -22,19 +22,23 @@ describe("actions", () => {
     });
 
     // https://medium.com/@netxm/test-async-redux-actions-jest-e703add2cf91
-    it('triggers todo fetch', () => {
-        const todos = [
+    it('triggers history fetch', () => {
+        const history = [
             {
-                "userId": 1,
                 "id": 1,
-                "title": "delectus aut autem",
-                "completed": false
+                "dateString": "2020-01-13",
+                "baseCurrency": "EUR",
+                "targetCurrency": "USD",
+                "currentRate": 1.345,
+                "avarageRate": 1.321
             },
             {
-                "userId": 1,
                 "id": 2,
-                "title": "quis ut nam facilis et officia qui",
-                "completed": false
+                "dateString": "2020-01-13",
+                "baseCurrency": "CAD",
+                "targetCurrency": "USD",
+                "currentRate": 1.123,
+                "avarageRate": 1.100
             }];
 
         moxios.wait(() => {
@@ -42,19 +46,20 @@ describe("actions", () => {
 
             request.respondWith({
                 status: 200,
-                response: todos
+                response: history
             });
         });
 
         const expectedActions = [
-            { type: FETCH_TODOS_BEGIN },
-            { type: FETCH_TODOS_SUCCESS, payload: { items: todos } },
+            { type: FETCH_EXCHANGE_RATE_HISTORY_BEGIN },
+            { type: FETCH_EXCHANGE_RATE_HISTORY_SUCCESS, payload: { items: history } },
         ];
 
         // if there is no current state > initial state
         const store = mockStore();
+        const historyDate = 'daily/2020-01-19'
 
-        return store.dispatch(fetchToDos()).then(() => {
+        return store.dispatch(fetchExchangeRateHistory(historyDate)).then(() => {
             // return of async actions
             expect(store.getActions()).toEqual(expectedActions);
         });

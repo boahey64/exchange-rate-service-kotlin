@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchExchangeRateHistory } from "./action";
 
 class HistoryResult extends React.Component {
     render() {
@@ -19,6 +18,7 @@ class HistoryResult extends React.Component {
 
         return (
             <div>
+                <div>{this.props.historyQuery.date}</div>
                 <ul>
                     {historyItems.map(item =>
                         <li key={item.id}>{item.id} {item.dateString} {item.baseCurrency} {item.targetCurrency} {item.currentRate} {item.averageRate} {item.trend}  </li>
