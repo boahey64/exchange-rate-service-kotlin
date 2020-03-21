@@ -3,6 +3,9 @@ import {
     FETCH_EXCHANGE_RATE_BEGIN,
     FETCH_EXCHANGE_RATE_SUCCESS,
     FETCH_EXCHANGE_RATE_FAILURE,
+    FETCH_VALID_CURRENCIES_BEGIN,
+    FETCH_VALID_CURRENCIES_SUCCESS,
+    FETCH_VALID_CURRENCIES_FAILURE,
 } from './components/exchangeratequery/action';
 
 import {
@@ -23,6 +26,7 @@ const initialState = {
         targetCurrency: 'USD',
         date: '2020-01-24',
     },
+    validCurrencies: [],
     loading: false,
     error: null
 };
@@ -66,6 +70,27 @@ export function reducer(state = initialState, action) {
                 loading: false,
                 error: action.payload.error,
                 item: {}
+            };
+        case FETCH_VALID_CURRENCIES_BEGIN:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+
+        case FETCH_VALID_CURRENCIES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                validCurrencies: action.payload.validCurrencies
+            };
+
+        case FETCH_VALID_CURRENCIES_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.error,
+                validCurrencies: []
             };
         case FETCH_EXCHANGE_RATE_HISTORY_BEGIN:
             return {

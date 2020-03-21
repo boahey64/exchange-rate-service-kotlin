@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchExchangeRate } from "./action";
+import {fetchExchangeRate, fetchValidCurrencies} from "./action";
 import {fetchExchangeRateHistory} from "../history/action";
 
 class ExchangeRateQueryForm extends React.Component {
@@ -12,11 +12,15 @@ class ExchangeRateQueryForm extends React.Component {
       baseCurrency: props.query.baseCurrency,
       targetCurrency: props.query.targetCurrency,
       date: props.query.date,
-      historyQuery: props.historyQuery,
+      historyQuery: props.historyQuery
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(fetchValidCurrencies());
   }
 
   handleInputChange(event) {
@@ -34,9 +38,6 @@ class ExchangeRateQueryForm extends React.Component {
 
   handleSubmit(event) {
     console.log('handleSubmit:');
-    console.log(' baseCurrency: ' + this.state.baseCurrency);
-    console.log(' targetCurrency: ' + this.state.targetCurrency);
-    console.log(' date: ' + this.state.date);
     event.preventDefault();
 
     this.props.query.baseCurrency = this.state.baseCurrency;
@@ -59,20 +60,30 @@ class ExchangeRateQueryForm extends React.Component {
     return (
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label className="input-label">
+             <label className="input-label">
               Base Currency:
-              <input className="input-field"
-                name="baseCurrency"
-                value={this.state.baseCurrency}
-                onChange={this.handleInputChange} />
+               <select className="select-box"
+                   name="baseCurrency"
+                   value={this.state.baseCurrency}
+                   onChange={this.handleInputChange}
+               >
+                 {this.props.validCurrencies.map((e, key) => {
+                   return <option key={key} value={e}>{e}</option>;
+                 })}
+               </select>
             </label>
             <br />
             <label className="input-label">
               Target Currency:
-              <input className="input-field"
-                name="targetCurrency"
-                value={this.state.targetCurrency}
-                onChange={this.handleInputChange} />
+              <select className="select-box"
+                  name="targetCurrency"
+                  value={this.state.targetCurrency}
+                  onChange={this.handleInputChange}
+              >
+                {this.props.validCurrencies.map((e, key) => {
+                  return <option key={key} value={e}>{e}</option>;
+                })}
+              </select>
             </label>
             <br />
             <label className="input-label">
@@ -94,6 +105,7 @@ const mapStateToProps = state => ({
     item: state.item,
     query: state.query,
     historyQuery: state.historyQuery,
+    validCurrencies: state.validCurrencies,
     loading: state.loading,
     error: state.error
 });

@@ -89,6 +89,10 @@ main .sub-content ul {
     padding: 0;
 }
 
+main .select-box {
+    width: 50px;
+}
+
 main .input-field {
     width: 90px;
 }

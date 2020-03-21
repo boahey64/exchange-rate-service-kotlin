@@ -10,6 +10,7 @@ describe("reducer", () => {
             count: 0,
             error: null,
             items: [],
+            validCurrencies: [],
             loading: false
         };
         expect(reducer(undefined, {})).toEqual(expectedState);
