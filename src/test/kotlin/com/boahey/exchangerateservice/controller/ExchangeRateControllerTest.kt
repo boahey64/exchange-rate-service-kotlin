@@ -80,6 +80,17 @@ internal class ExchangeRateControllerTest {
         checkAssertionsForWrongParameter(mvcResult, expectedErrorResponse)
     }
 
+    @Test
+    internal fun get_valid_currencies() {
+        doReturn(setOf("EUR", "INR", "USD"))
+                .whenever(exchangeRateService).getValidCurrencies()
+
+        mockMvc.perform(MockMvcRequestBuilders.get("$path/currencies/valid"))
+                .andExpect(status().isOk)
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.length()", equalTo(3)))
+                .andExpect(jsonPath("[0]", equalTo("EUR")))
+    }
 
     @Test
     fun get_daily_local_history() {

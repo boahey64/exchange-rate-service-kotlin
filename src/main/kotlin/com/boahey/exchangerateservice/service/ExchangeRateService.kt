@@ -44,6 +44,10 @@ class ExchangeRateService(
         } else Optional.empty<ExchangeRate>()
     }
 
+    fun getValidCurrencies(): Set<*> {
+        val exchangeApiRates: ExchangeApiRates = getExchangeApiRates("latest", "USD")
+        return exchangeApiRates.rates.keys
+    }
 
     fun getExchangeRateHistory(startDate: String?, endDate: String?): ExchangeApiRatesHistory? {
         val exchangeApiRatesMono = exchangeRatesApiClient.getExchangeApiHistory(startDate!!, endDate!!)
@@ -114,11 +118,6 @@ class ExchangeRateService(
     private fun convertJsonResponseToListOfExchangeApiRatesHistory(clientResponse: String?): ExchangeApiRatesHistory? {
         val g = Gson()
         return g.fromJson(clientResponse, ExchangeApiRatesHistory::class.java)
-    }
-
-    private fun getValidCurrencies(): Set<*> {
-        val exchangeApiRates: ExchangeApiRates = getExchangeApiRates("latest", "USD")
-        return exchangeApiRates.rates.keys
     }
 
 }

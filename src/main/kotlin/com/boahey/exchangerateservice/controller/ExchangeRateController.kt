@@ -33,6 +33,11 @@ class ExchangeRateController(
         throw NotExpectedErrorException()
     }
 
+    @GetMapping("/currencies/valid")
+    fun geValidCurrencies(): List<*> {
+        return exchangeRateService.getValidCurrencies().toList()
+    }
+
     @GetMapping("/history/local/daily/{yyyy}/{MM}/{dd}")
     fun getDailyHistoryLocal(
             @PathVariable yyyy: String,
