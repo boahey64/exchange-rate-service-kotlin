@@ -24,6 +24,7 @@ class ExchangeRateService(
         private val validationService: ValidationService,
         private val usageService: UsageService
 ) {
+    private var validCurrenciesSingleton: Set<String> = emptySet()
 
     @Throws(InvalidCurrencyException::class)
     fun getExchangeData(exchangeRateInput: ExchangeRateInput, customerId: String, randomQueryDate: Boolean): Optional<ExchangeRate>? {
@@ -45,8 +46,11 @@ class ExchangeRateService(
     }
 
     fun getValidCurrencies(): Set<*> {
-        val exchangeApiRates: ExchangeApiRates = getExchangeApiRates("latest", "USD")
-        return exchangeApiRates.rates.keys
+        if(validCurrenciesSingleton.isEmpty()) {
+            val exchangeApiRates: ExchangeApiRates = getExchangeApiRates("latest", "USD")
+            validCurrenciesSingleton = exchangeApiRates.rates.keys
+        }
+        return validCurrenciesSingleton
     }
 
     fun getExchangeRateHistory(startDate: String?, endDate: String?): ExchangeApiRatesHistory? {
