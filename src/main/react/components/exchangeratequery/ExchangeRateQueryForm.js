@@ -45,15 +45,11 @@ class ExchangeRateQueryForm extends React.Component {
     this.props.query.date = this.state.date;
 
     const convertedDate = this.state.date.replace('-', '/').replace('-', '/');
-    console.log("convertedDate: " + convertedDate);
     this.props.historyQuery.date = 'daily/'+convertedDate;
     console.log("convertedDate historyQuery: " + this.props.historyQuery.date);
 
-    console.log('before fetchExchangeRate');
     this.props.dispatch(fetchExchangeRate(this.state.date, this.state.baseCurrency, this.state.targetCurrency));
-    console.log('fetchExchangeRate');
     this.props.dispatch(fetchExchangeRateHistory(this.props.historyQuery.date));
-    console.log('fetchExchangeRateHistory');
   }
 
   render() {

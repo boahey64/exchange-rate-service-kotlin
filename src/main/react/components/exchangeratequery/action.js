@@ -15,9 +15,6 @@ export function fetchExchangeRate(date, baseCurrency, targetCurrency) {
             .catch(err => {
                 dispatch(fetchExchangeRateFailure(err));
             });
-        // console.log("response: " + response.data);
-        // dispatch(fetchExchangeRateSuccess(response.data));
-        // return response.data;
     };
 }
 

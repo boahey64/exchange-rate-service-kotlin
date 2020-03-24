@@ -24,7 +24,7 @@ describe("actions", () => {
     });
 
     // https://medium.com/@netxm/test-async-redux-actions-jest-e703add2cf91
-    it('triggers exchage rate fetch', () => {
+    it('triggers exchange rate fetch', () => {
         const exchangeRate =
             {
                 "currentRate": 1.345,
@@ -53,7 +53,6 @@ describe("actions", () => {
         const date = '2020-01-19';
         return store.dispatch(fetchExchangeRate(date, baseCurrency, targetCurrency)).then(() => {
             // return of async actions
-            console.log('store.getActions(): ' + store.getActions());
             expect(store.getActions()).toEqual(expectedActions);
         });
     });
@@ -79,7 +78,6 @@ describe("actions", () => {
         const store = mockStore();
         return store.dispatch(fetchValidCurrencies()).then(() => {
             // return of async actions
-            console.log('validCurrencies store.getActions(): ' + store.getActions());
             expect(store.getActions()).toEqual(expectedActions);
         });
     });

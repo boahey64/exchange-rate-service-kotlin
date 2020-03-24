@@ -32,13 +32,8 @@ class HistoryQueryForm extends React.Component {
 
   handleSubmit(event) {
     console.log('handleSubmit:');
-    // console.log(' baseCurrency: ' + this.state.baseCurrency);
-    //console.log(' targetCurrency: ' + this.state.targetCurrency);
-    console.log(' historyQuery.date: ' + this.state.date);
     event.preventDefault();
 
-    // this.props.query.baseCurrency = this.state.baseCurrency;
-    // this.props.query.targetCurrency = this.state.targetCurrency;
     this.props.historyQuery.date = this.state.date;
 
     this.props.dispatch(fetchExchangeRateHistory(this.state.date));
