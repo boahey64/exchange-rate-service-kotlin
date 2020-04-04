@@ -1,0 +1,8 @@
+---
+- name: "install haveged - entropy is very low on VMs without this daemon"
+  apt:
+    name: haveged
+
+- name: "install curl"
+  apt:
+    name: curl

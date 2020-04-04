@@ -1,0 +1,20 @@
+---
+- name: "add zulu key"
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 219BD9C9
+
+- name: "add zulu repository"
+  apt_repository:
+    repo: deb http://repos.azulsystems.com/debian stable main
+    state: present
+
+- name: "unistall zulu-11"
+  apt:
+    name: "zulu-11"
+    state: absent
+
+- name: "install zulu-8"
+  apt:
+    name: "zulu-8"
+    update_cache: yes

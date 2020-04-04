@@ -1,0 +1,78 @@
+- name: add group 'consumer'
+  group:
+    name: consumer
+    state: present
+
+- name: create consumer default puppet role directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0777
+  with_items:
+    - /data
+    - /etc/boahey
+
+- name: install packages
+  apt:
+    update_cache: yes
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+      # for the fun
+      - vim
+      - htop
+      # to allow chattr usage in the debian package
+      - attr
+
+- name: install boahey certificates
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/local/share/ca-certificates/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - CA_boahey_intern_2020.crt
+  register: installed_certificates
+
+- name: update certificates
+  command: update-ca-certificates
+  when: installed_certificates.changed
+
+- name: copy artifactory repo key
+  copy:
+    src: repo.eu.boahey.com.pubKey
+    dest: /tmp/repo.eu.boahey.com.pubKey
+
+- name: add artifactory repo key
+  apt_key:
+    id: 6633A00EF91CEE72A3C564ECC76DFF33A95B0450
+    file: /tmp/repo.eu.boahey.com.pubKey
+    state: present
+
+#- name: add artifactory repository
+#  apt_repository:
+#    repo: deb https://repo.eu.boahey.com/artifactory/debs-local/ all main
+#    filename: repo-debs-local
+#
+#- name: copy aptrepo key
+#  copy:
+#    src: aptrepo.srv00.inf00.eu.boahey.com.pubkey
+#    dest: /tmp/aptrepo.srv00.inf00.eu.boahey.com.pubkey
+#
+#- name: add aptrepo key
+#  apt_key:
+#    id: 821C8A98E0ED5F99
+#    file: /tmp/aptrepo.srv00.inf00.eu.boahey.com.pubkey
+#    state: present
+
+#- name: add boahey debian mirror
+#  apt_repository:
+#    repo: deb https://repo.eu.boahey.com/artifactory/debs stretch main
+#    filename: aptrepo
+#
+#- name: add boahey debian mirror backports
+#  apt_repository:
+#    repo: deb https://repo.eu.boahey.com/artifactory/debs stretch-backports main
+#    filename: aptrepo-backports

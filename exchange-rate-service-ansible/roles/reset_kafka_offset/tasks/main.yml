@@ -1,0 +1,20 @@
+---
+- name: "stop kafka listeners"
+  uri:
+    url: http://{{ inventory_hostname }}:8080/actuator/kafkalisteners/STOP
+    method: POST
+    status_code: 204
+  notify: "start_kafka_listeners"
+
+- name: "reset kafka offset"
+  uri:
+    url: http://{{ inventory_hostname }}:8080/actuator/{{ endpoint }}/{{ topic }}/{{ offset }}
+    method: POST
+    status_code: 204
+  run_once: true
+
+- name: "start kafka listeners"
+  uri:
+    url: http://{{ inventory_hostname }}:8080/actuator/kafkalisteners/START
+    method: POST
+    status_code: 204

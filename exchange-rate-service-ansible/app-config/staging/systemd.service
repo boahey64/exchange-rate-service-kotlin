@@ -1,0 +1,15 @@
+[Unit]
+Description={{ application_name }}
+After=syslog.target
+
+[Service]
+Environment=SPRING_PROFILES_ACTIVE=staging
+User={{ application_name }}
+ExecStart={{ application_home_dir }}/{{ application_name }}.jar
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=30
+LimitNOFILE=8192
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,140 @@
+- name: "switch to maintenance mode to get out of the F5 pool"
+  uri:
+    url: http://localhost:8080/prepare-shutdown
+    method: POST
+  ignore_errors: yes
+
+- name: "give F5 time to remove VM from pool"
+  wait_for:
+    timeout: 5
+
+- name: "scheduling downtime in icinga"
+  when: skip_icinga is not defined
+  uri:
+    url: "https://icinga-cgi.eu.boahey.com/service/icinga_downtime?host={{ inventory_hostname }}&sec=300&com=deployment"
+    validate_certs: no
+    return_content: yes
+  delegate_to: localhost
+  register: response
+  # try to schedule downtime for about a minute; if the service is down: proceed the deployment
+  retries: 60
+  until: "'Successfully scheduled downtime' in response.content"
+  ignore_errors: yes
+
+- name: "stop service"
+  systemd:
+    name: "{{ application_name }}"
+    state: stopped
+  ignore_errors: yes
+
+- name: "cleanup old tomcat temp files"
+  shell: rm -rf /tmp/tomcat.*.8080
+  args:
+    warn: false
+
+- name: "install tomcat libtcnative-1"
+  apt:
+    name: "libtcnative-1"
+
+- name: "copy stage aware systemd service file"
+  template:
+    src: "app-config/{{ spring_active_profile }}/systemd.service"
+    dest: "/etc/systemd/system/{{ application_name }}.service"
+    mode: 0400
+
+- name: "check if jar exists"
+  stat:
+    path: "{{ application_home_dir }}/{{ application_name }}.jar"
+  register: jar_stat_result
+
+- name: "make jar mutable before overwriting it (acl)"
+  file:
+    path: "{{ application_home_dir }}/{{ application_name }}.jar"
+    attr: "e"
+  when: jar_stat_result.stat.exists == True
+
+- name: "copy application to host"
+  copy:
+    src: "{{ application_jar }}"
+    dest: "{{ application_home_dir }}/{{ application_name }}.jar"
+    owner: "{{ application_name }}"
+    group: "{{ application_name }}"
+    mode: 0500
+
+- name: "make jar immutable (acl)"
+  file:
+    path: "{{ application_home_dir }}/{{ application_name }}.jar"
+    attr: "ie"
+
+- name: "start application"
+  systemd:
+    name: "{{ application_name }}"
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  no_log: True
+
+- name: "wait for the application server to start"
+  wait_for: host=localhost port=8080 timeout=100
+  register: server_port
+  become: no
+  failed_when: server_port is failed
+
+- name: "wait for the application to start"
+  uri:
+    url: "http://localhost:8080/status/build"
+    headers:
+      Accept: "application/json"
+  register: server_status
+  until: server_status.status | default(0) == 200
+  retries: 30
+  become: no
+  failed_when: server_status is failed
+
+- name: "ensure F5 status endpoint returns 'OK'"
+  uri:
+    url: "http://localhost:8080/status/alive"
+    return_content: yes
+  register: alive_response
+  until:
+    - "alive_response.content == 'OK'"
+  retries: 5
+  become: no
+
+- when: commit_version is defined
+  uri:
+    url: http://localhost:8080/status/build
+  name: "verify correct version has been deployed"
+  register: status_build
+
+- when: commit_version is defined
+  name: "check for correct build id"
+  assert:
+    that:
+      - "'{{ status_build.json.buildId }}' == '{{ commit_version }}'"
+    msg: "wrong commit version, found {{ status_build.json.buildId }}, expected {{ commit_version }}"
+
+- name: "ensure all dependent systems are reachable"
+  uri:
+    url: "http://localhost:8080/actuator/health"
+    return_content: yes
+    headers:
+      Accept: "application/json"
+  register: health_response
+  until:
+    - "health_response.json.status == 'UP'"
+  retries: 30
+  become: no
+
+- when: skip_icinga is not defined
+  name: "remove icinga downtime"
+  uri:
+    url: "https://icinga-cgi.eu.boahey.com/service/icinga_remove_downtime?host={{ inventory_hostname }}"
+    validate_certs: no
+    return_content: yes
+  delegate_to: localhost
+  register: response
+  # try to remove downtime for about a minute; if the service is down: proceed the deployment
+  retries: 60
+  until: "'Successfully removed all downtimes'"
+  ignore_errors: yes

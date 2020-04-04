@@ -1,0 +1,18 @@
+[stg]
+exchange-rate-service-01.ipc00.stg07.eu.boahey.com
+
+[stg:vars]
+spring_active_profile=staging
+jdk_package_uninstall = "zulu-11"
+jdk_package = "zulu-8"
+
+[pro]
+exchange-rate-service-01.ipc00.pro07.eu.boahey.com
+exchange-rate-service-02.ipc00.pro06.eu.boahey.com
+
+
+
+[pro:vars]
+spring_active_profile=production
+jdk_package_uninstall = "zulu-11"
+jdk_package = "zulu-8"

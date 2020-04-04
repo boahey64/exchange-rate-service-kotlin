@@ -1,0 +1,13 @@
+- name: Check if puppet binary exists
+  stat:
+    path: /usr/bin/puppet
+  register: puppet_result
+
+- name: disable puppet
+  command: puppet agent --disable "ansible run"
+  when: puppet_result.stat.exists == True
+
+- name: register playbook finished listener
+  command: echo "register playbook finished listener"
+  notify: "enable puppet"
+  when: puppet_result.stat.exists == True

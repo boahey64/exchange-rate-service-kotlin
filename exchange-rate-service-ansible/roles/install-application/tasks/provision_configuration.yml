@@ -1,0 +1,48 @@
+- name: "create application home directory"
+  file:
+    path: "{{ application_home_dir }}"
+    state: directory
+    mode: 0555
+
+- name: "create log directory"
+  file:
+    path: "/var/log/{{ application_name }}"
+    state: directory
+    mode: 0755
+    owner: "{{ application_name }}"
+    group: "{{ application_name }}"
+
+#- name: "provision logback-config file"
+#  template:
+#    src: "../{{ application_name }}-server/src/main/resources/logback-spring.xml"
+#    dest: "{{ application_home_dir }}/logback-spring.xml"
+#    owner: "{{ application_name }}"
+#    group: "{{ application_name }}"
+#    mode: 0600
+
+- name: "create header cache directory"
+  file:
+    path: "/var/cache/{{ application_name }}"
+    state: directory
+    mode: 0755
+    owner: "{{ application_name }}"
+    group: "{{ application_name }}"
+
+- name: "provide stage specific JVM OPTS to the spring-boot war"
+  template:
+    src: "app-config/{{ spring_active_profile }}/jvm.conf"
+    dest: "{{ application_home_dir }}/{{ application_name }}.conf"
+    owner: "{{ application_name }}"
+    group: "{{ application_name }}"
+    mode: 0400
+
+- name: "copy JMX configuration files"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ application_home_dir }}"
+    mode: 0400
+    owner: "{{ application_name }}"
+    group: "{{ application_name }}"
+  with_items:
+    - app-config/jmxremote.access
+    - app-config/jmxremote.password

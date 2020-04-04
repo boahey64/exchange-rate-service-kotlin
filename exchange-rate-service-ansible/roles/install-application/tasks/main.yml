@@ -1,0 +1,16 @@
+- name: "ensure application group exists"
+  group:
+    name: "{{ application_name }}"
+    system: yes
+    state: present
+
+- name: "ensure application user exists"
+  user:
+    name: "{{ application_name }}"
+    group: "{{ application_name }}"
+    system: yes
+    createhome: no
+    uid: 3000
+
+- import_tasks: provision_configuration.yml
+- import_tasks: install_application.yml

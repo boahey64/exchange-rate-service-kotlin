@@ -1,0 +1,25 @@
+- name: "provision exchange-rate-service"
+  hosts: all
+  serial: 1
+  become: yes
+  become_method: sudo
+
+#  vars:
+#    - application_name: exchange-rate-service
+#    - application_home_dir: "/usr/share/{{ application_name }}"
+#    - application_jar: "../{{ application_name }}-server/target/{{ application_name }}-server-0.0.1-SNAPSHOT.jar"
+
+  vars:
+    - application_name: exchange-rate-service
+    - application_home_dir: "/usr/share/{{ application_name }}"
+    - application_jar: "../build/libs/{{ application_name }}-kotlin-0.0.1-SNAPSHOT.jar"
+
+  pre_tasks:
+    - debug:
+        msg: "active config is {{ spring_active_profile }}"
+
+  roles:
+    - disable-puppet
+    - install-tools
+    - install-java
+    - install-application
