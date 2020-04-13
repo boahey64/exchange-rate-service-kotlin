@@ -49,6 +49,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("com.google.code.gson:gson:2.8.6")
+	implementation("io.github.microutils:kotlin-logging:1.7.6")
+
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 
@@ -69,6 +72,21 @@ dependencies {
 		exclude(module = "spring-integration-java-dsl")
 	}
 	testImplementation("io.projectreactor:reactor-test:3.2.10.RELEASE")
+
+//	val fluenleniumVersion = "3.7.1"
+
+	val fluenleniumVersion = "4.3.1"
+	val seleniumVersion = "3.141.59"
+	testImplementation("org.fluentlenium:fluentlenium-junit:$fluenleniumVersion") {
+		because("4.x requires Java 11")
+	}
+	testImplementation("org.fluentlenium:fluentlenium-assertj:$fluenleniumVersion") {
+		because("4.x requires Java 11")
+	}
+	testImplementation("io.github.bonigarcia:webdrivermanager:3.3.0")
+	testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+	testImplementation("net.wuerl.kotlin:assertj-core-kotlin:0.2.1")
+	testImplementation("com.nhaarman:mockito-kotlin-kt1.1:1.6.0")
 
 }
 
