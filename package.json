@@ -14,7 +14,9 @@
     "react-redux": "^7.1.0",
     "react-scripts": "3.3.0",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "@paralleldrive/feature-toggles": "^1.0.4",
+    "@paralleldrive/react-feature-toggles": "^2.2.0"
   },
   "scripts": {
     "bundle": "parcel build src/main/react/index.js --detailed-report --no-cache --out-dir build/parcel/static/exchange-rate-service-kotlin/dist --out-file bundle-react --public-url /exchange-rate-service-kotlin/dist",

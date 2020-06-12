@@ -1,5 +1,6 @@
 package com.boahey.exchangerateservice.controller.mainpage
 
+import com.boahey.exchangerateservice.config.togglz.ExchangeRateFeature
 import com.boahey.exchangerateservice.controller.mainpage.templates.DemoListMeta
 import com.boahey.exchangerateservice.controller.mainpage.templates.renderDemoList
 import org.springframework.http.HttpStatus
@@ -43,7 +44,18 @@ class MainPageController {
 
     private fun basicMetaTags(): Map<String, String> = mapOf(
         "boahey-demo-i18n" to "frontendI18nBundle()",
-        "boahey-demo-tld" to "site.language"
+        "boahey-demo-tld" to "site.language",
+            "wishlist-features" to calculateFeatureToggles()
     )
+
+    private fun calculateFeatureToggles(): String {
+        val activeToggles = getActiveToggles()
+        if (activeToggles.isNotEmpty()) {
+            return "$activeToggles, EXTRA_FEATURE"
+        }
+        return "EXTRA_FEATURE"
+    }
+    private fun getActiveToggles(): String =
+            ExchangeRateFeature.values().filter { it.isActive }.joinToString(separator = ",") { it.name }
 
 }

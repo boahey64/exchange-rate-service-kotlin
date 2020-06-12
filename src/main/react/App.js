@@ -9,7 +9,10 @@ import ExchangeRateQueryForm from "./components/exchangeratequery/ExchangeRateQu
 import ExchangeRateResult from "./components/exchangeratequery/ExchangeRateResult";
 import HistoryResult from "./components/history/HistoryResult";
 import HistoryQueryForm from "./components/history/HistoryQueryForm";
+import activeFeatures from "./togglz";
+import { FeatureToggles} from "@paralleldrive/react-feature-toggles";
 
+const features = activeFeatures();
 
 // Redux DevTools setup: https://github.com/zalmoxisus/redux-devtools-extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -54,17 +57,20 @@ function App() {
                 <HistoryResult/>
             </div>
         </aside>
-        <footer>
-            <div className="footer-content">
-                <nav>
-                    <ul>
-                        <li>Home</li>
-                        <li>About Us</li>
-                        <li>Contact Us</li>
-                    </ul>
-                </nav>
-            </div>
-        </footer>
+        <FeatureToggles features={features}>
+
+            <footer>
+                <div className="footer-content">
+                    <nav>
+                        <ul>
+                            <li>Home</li>
+                            <li>About Us</li>
+                            <li>Contact Us</li>
+                        </ul>
+                    </nav>
+                </div>
+            </footer>
+        </FeatureToggles>
     </Provider>
   );
 }
